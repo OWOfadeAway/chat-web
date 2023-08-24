@@ -8,17 +8,18 @@ import Chatcontainer from './componts/Chatcontainer';
 const { Search } = Input;
 const UserSerch = ()=>{
   const [searchData , setSearchData] = useState<any>([{username:'asd'}])
+  const [searchText , setsearchText] = useState<string>('')
   const nav = useNavigate()
 
   const tomsg = (id) =>{
     nav('/otochat/'+id)
   } 
-  const search = ()=>{
-
+  const search = (e)=>{
+    setSearchData([{username:searchText}])
   }
   return (
     <div className={styles.chatSection}>
-            <Search placeholder="搜索用户" onSearch={search} enterButton />
+            <Search placeholder="搜索用户" value={searchText} onInput={(e:any)=>{setsearchText(e.target.value)}} onSearch={search} enterButton />
             <List
               dataSource={searchData}
               renderItem={(item) => (
