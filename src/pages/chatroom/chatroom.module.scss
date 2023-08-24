@@ -11,8 +11,34 @@
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    .open{
+      display: none;
+    }
   }
-  
+  @media screen and (max-width:800px) {
+    .userList{
+      position: fixed;
+      height: 100%;
+      width: 50%;
+      // position: relative;
+      left: -50%;
+      top: 0;
+      transition: all 0.5s ;
+      .open{
+        display: block;
+        position: absolute;
+        width: 40px;
+        height:40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        color: rgb(255, 255, 255);
+        background-color: aquamarine;
+        right: -40px;
+      }
+    }
+  }
   .chatSection {
     flex: 5;
     display: flex;
@@ -53,6 +79,16 @@
         }
         .thismessage{
         background-color:rgb(149, 236, 105)
+        }
+      }
+      @media screen and (max-width:800px) {
+        .messageBox{
+          .user{
+            width: 10%;
+          }
+          .message{
+            width: 95%;
+          }
         }
       }
     }

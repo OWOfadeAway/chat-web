@@ -98,4 +98,18 @@ body, html {
     color: white;
     border-color: black;
   }
-  
+  @media screen and (max-width: 800px) {
+    .image-container{
+      // display: none;
+      position: fixed;
+      width: 100vw;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+
+    }
+    .form-container{
+      z-index: 2;
+      background-color: rgba($color: #e6e0e0, $alpha: 0.5);
+    }
+  }

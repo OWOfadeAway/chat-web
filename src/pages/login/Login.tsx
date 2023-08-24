@@ -3,9 +3,9 @@ import './Login.scss';
 import {useNavigate} from 'react-router'
 //https://th.bing.com/th/id/R.676c53bb087fae58ca7e5d5e57276f6e?rik=RGIvJAb62Mk16w&pid=ImgRaw&r=0
 const Login = () => {
-  const [username,setUser] = useState('')
+  const [username,setUser] = useState<any>('')
   const nav = useNavigate()
-  const submit = (e)=>{
+  const submit = ()=>{
     if(username == ''){
       alert('Username can not be empty')
     }else{
@@ -23,7 +23,7 @@ const Login = () => {
         <form>
           <div className="input-container">
             <label htmlFor="username">Username:</label>
-            <input value={username} onInput={(e)=>{setUser(e.target.value)}} type="text" id="username" name="username" placeholder="Enter your username or email  " />
+            <input value={username} onInput={(e:any)=>{setUser(e.target.value)}} type="text" id="username" name="username" placeholder="Enter your username or email  " />
           </div>
           {/* <div className="input-container">
             <label htmlFor="password">Password:</label>

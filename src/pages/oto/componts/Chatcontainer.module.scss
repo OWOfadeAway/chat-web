@@ -1,0 +1,93 @@
+.chatSection {
+    flex: 5;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    .top{
+      background-color: #f0f0f0;
+      height: 40px;
+      border-radius: 10px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      margin-bottom: 5px;
+    }
+    .messages {
+      flex: 1;
+      overflow-y: scroll;
+      padding-top: 10px;
+      .rever {
+        flex-direction: row-reverse;
+      }
+      .messageBox {
+        margin-bottom: 20px;
+        display: flex;
+        .user {
+          width: 5%;
+          height: 60px;
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          .avatar {
+            width: 40px;
+            height: 40px;
+          }
+        }
+        .message {
+          width: 90%;
+          margin-bottom: 10px;
+          min-height: 60px;
+          padding: 10px;
+          background-color: #eff0f1;
+          border-radius: 5px;
+        }
+        .thismessage {
+          background-color: rgb(149, 236, 105);
+        }
+      }
+      @media screen and (max-width: 800px) {
+        .messageBox {
+          .user {
+            width: 10%;
+          }
+          .message {
+            width: 95%;
+          }
+        }
+      }
+    }
+  
+    .inputArea {
+      display: flex;
+      margin-top: 10px;
+  
+      input {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        border-radius: 5px 0 0 5px;
+      }
+  
+      button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        transition:
+          background-color 0.3s,
+          color 0.3s;
+  
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+    }
+  }
