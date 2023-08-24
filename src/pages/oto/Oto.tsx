@@ -95,7 +95,8 @@ const Oto = () => {
          //   newMsg()
     }  
     // 处理websocket 错误事件
-    newSocket.onerror = function(){
+    newSocket.onerror = function(e){
+        console.log(e);
         
         // nav('/')
     }
@@ -126,17 +127,23 @@ const Oto = () => {
     setMsgList((e)=>Object.keys(data)) 
   }
 
-  const handleSendMessage = () => {
-    if (newMessage.trim() !== '') {
+  const handleSendMessage = (msg:string,to:string) => {
+    if (msg.trim() !== '') {
       const newMsg = {
-        msg:newMessage,
+        msg,
         type:'sendMsg',
-        from:username
+        from:username,
+        to
       }
+      console.log(socket.readyState);
+      
       socket.send(JSON.stringify(newMsg))
-      const updatedMessages = [...messages, newMsg];
-      setMessages(updatedMessages);
-      setNewMessage('');
+      setmsgdata((msgdata)=>{
+        msgdata = JSON.parse(JSON.stringify(msgdata))
+          msgdata.hasOwnProperty(newMsg.to) ? msgdata[newMsg.to].push(newMsg):(msgdata[newMsg.to] = [newMsg])
+          msgList.includes(newMsg.to)?null:setMsgList((msglist)=>[...msglist,newMsg.to])
+        return { ...msgdata }
+      })
     }
   };
   const switchO = ()=>{
@@ -160,7 +167,7 @@ const Oto = () => {
       </div>
         <Routes>
           {/* userSerch */}
-          <Route path='/:id' element={<Chatcontainer key={msgdata[parmas.id]?.length || 0} msgData={msgdata}/>}></Route>
+          <Route path='/:id' element={<Chatcontainer key={msgdata[parmas.id]?.length || 0} sendMsg={handleSendMessage} msgData={msgdata}/>}></Route>
           <Route path='/*' element={<UserSerch/>}></Route>
         </Routes>
     </div>

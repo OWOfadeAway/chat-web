@@ -45,6 +45,7 @@
     // position: relative;
     left: -50%;
     top: 0;
+    z-index: 10;
     transition: all 0.5s;
     .open {
       display: block;

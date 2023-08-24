@@ -1,18 +1,27 @@
 import styles from './Chatcontainer.module.scss'
 import { useEffect, useState } from 'react'
 import { useOutletContext ,useParams ,useNavigate} from 'react-router'
-import { Button } from 'antd'
+import { Button ,Avatar} from 'antd'
 import { LeftCircleTwoTone } from '@ant-design/icons'
 const chatContainer = (props) => {
     // const [context,number] = useOutletContext()
-    const [newMessage, setNewMessage] = useState<any>('');
+    const [newMessage, setNewMessage] = useState<string>('');
     const params = useParams();
     const nav = useNavigate()
     const [username,setuser] = useState<any>(window.sessionStorage.getItem('username'))
+    const {sendMsg} = props
     console.log(props.msgData);
+    
     useEffect(() => {
-        console.log(props.msgData);
+        console.log(props);
+        const window = document.getElementById('window')
+        window.scrollTo(0,window.scrollHeight)
     },[props])
+    const send = ()=>{
+        console.log(newMessage);
+        sendMsg(newMessage,params.id)
+        setNewMessage('')
+    }
     return (
         <div className={styles.chatSection}>
             <div className={styles.top}> 
@@ -22,7 +31,7 @@ const chatContainer = (props) => {
                 <div>{params.id}</div>
                 <div></div>
             </div>
-            <div className={styles.messages}>
+            <div className={styles.messages} id='window'>
                 {props.msgData[params.id]?.map((value: any, index: number) => (
                     <div key={index} className={value.from != username ? [`${styles.messageBox}`, `${styles.rever}`].join(' ') : styles.messageBox}>
                         <div style={{ width: '5%' }}></div>
@@ -30,8 +39,9 @@ const chatContainer = (props) => {
                             {value.msg}
                         </div>
                         <div className={styles.user}>
-                            <img className={styles.avatar} src="https://img2.baidu.com/it/u=319844890,3540750762&fm=253&fmt=auto&app=120&f=JPEG?w=800&h=813" alt="" />
-                            {value.from}
+                        <Avatar>{value.from}</Avatar>
+                            {/* <img className={styles.avatar} src="https://img2.baidu.com/it/u=319844890,3540750762&fm=253&fmt=auto&app=120&f=JPEG?w=800&h=813" alt="" />
+                            {value.from} */}
                         </div> 
                     </div>
                 )) || ''}
@@ -43,7 +53,9 @@ const chatContainer = (props) => {
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
                 />
-                <button onClick={()=>{}}>发送✈</button>
+                <button onClick={()=>{
+                    send()
+                }}>发送✈</button>
             </div>
         </div>
     )
